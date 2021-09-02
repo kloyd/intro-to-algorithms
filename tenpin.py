@@ -28,9 +28,24 @@ def print_score():
         frame_marker = "  " 
         if(pin_score[pin_counter] == 10):
             #strike, check next 2 pins
-            frame_marker = "  |X| |"
+            frame_marker = "  |X"
             if(pin_score[pin_counter + 2] > -1):
                 frame_score = pin_score[pin_counter] + pin_score[pin_counter + 1] + pin_score[pin_counter + 2]
+                if(frame_counter == 10):
+                    # There is a strike in Frame 10, show the next two pin scores as well.
+                    extra_pin_1 = pin_score[pin_counter + 1]
+                    extra_pin_2 = pin_score[pin_counter + 2]
+                    if(extra_pin_1 == 10):
+                        frame_marker =  frame_marker + "|X"
+                    else:
+                        frame_marker = frame_marker + "|" + str(extra_pin_1)
+                    if(extra_pin_2 == 10):
+                        frame_marker = frame_marker + "|X"
+                    else:
+                        frame_marker = frame_marker + "|" + str(extra_pin_2)
+                    frame_marker = frame_marker + "|"
+                else:
+                    frame_marker = frame_marker + "| |"
             pin_counter = pin_counter + 1
         elif(pin_score[pin_counter] + pin_score[pin_counter + 1] == 10):
             #spare, check next pins
